@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Shield, Zap, Layers, Server } from 'lucide-react';
-import Shuffle from '../effects/shuffle';
+import Shuffle from '../effects/Shuffle';
 
 const Capabilities = () => {
   const capabilities = [
