@@ -1,16 +1,32 @@
 import { Twitter, Linkedin, Github, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Footer = () => {
   const [tooltipText, setTooltipText] = useState("");
   const [activeTooltip, setActiveTooltip] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSocialClick = (e, platform) => {
     e.preventDefault();
     setTooltipText("We are coming soon");
     setActiveTooltip(platform);
     setTimeout(() => setActiveTooltip(null), 2000);
+  };
+
+  const handleSectionClick = (e, targetId) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/#' + targetId);
+    } else {
+      const target = document.getElementById(targetId);
+      if (target) {
+        if (window.lenis) window.lenis.scrollTo(target, { offset: -80 });
+        else window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+      }
+    }
   };
 
   const containerVariants = {
@@ -44,9 +60,19 @@ const Footer = () => {
           className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12"
         >
           <motion.div variants={itemVariants} className="md:col-span-2">
-            <a href="#" className="font-bold text-fluid-h3 tracking-tighter text-white inline-block mb-6 hover:text-foreground transition-colors">
+            <Link 
+              to="/" 
+              onClick={(e) => {
+                if (location.pathname === '/') {
+                  e.preventDefault();
+                  if (window.lenis) window.lenis.scrollTo(0, { duration: 1.5 });
+                  else window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+              className="font-bold text-fluid-h3 tracking-tighter text-white inline-block mb-6 hover:text-foreground transition-colors"
+            >
               PRAGNOVA<span className="text-cta">.</span>
-            </a>
+            </Link>
             <p className="text-foreground-muted font-normal max-w-sm mb-6 leading-relaxed">
               Engineering the future through scalable, secure, and aesthetically powerful AI-integrated platforms 
               and advanced digital solutions.
@@ -98,54 +124,19 @@ const Footer = () => {
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
             <ul className="space-y-3">
               <li>
-                <a href="#about" onClick={(e) => {
-                  e.preventDefault();
-                  const target = document.getElementById('about');
-                  if (target) {
-                    if (window.lenis) window.lenis.scrollTo(target, { offset: -80 });
-                    else window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
-                  }
-                }} className="text-foreground-muted hover:text-primary transition-colors text-sm hover:translate-x-1 inline-block duration-300">About Us</a>
+                <a href="#about" onClick={(e) => handleSectionClick(e, 'about')} className="text-foreground-muted hover:text-primary transition-colors text-sm hover:translate-x-1 inline-block duration-300">About Us</a>
               </li>
               <li>
-                <a href="#identity" onClick={(e) => {
-                  e.preventDefault();
-                  const target = document.getElementById('identity');
-                  if (target) {
-                    if (window.lenis) window.lenis.scrollTo(target, { offset: -80 });
-                    else window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
-                  }
-                }} className="text-foreground-muted hover:text-primary transition-colors text-sm hover:translate-x-1 inline-block duration-300">Who We Are</a>
+                <a href="#identity" onClick={(e) => handleSectionClick(e, 'identity')} className="text-foreground-muted hover:text-primary transition-colors text-sm hover:translate-x-1 inline-block duration-300">Who We Are</a>
               </li>
               <li>
-                <a href="#capabilities" onClick={(e) => {
-                  e.preventDefault();
-                  const target = document.getElementById('capabilities');
-                  if (target) {
-                    if (window.lenis) window.lenis.scrollTo(target, { offset: -80 });
-                    else window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
-                  }
-                }} className="text-foreground-muted hover:text-primary transition-colors text-sm hover:translate-x-1 inline-block duration-300">Capabilities</a>
+                <a href="#capabilities" onClick={(e) => handleSectionClick(e, 'capabilities')} className="text-foreground-muted hover:text-primary transition-colors text-sm hover:translate-x-1 inline-block duration-300">Capabilities</a>
               </li>
               <li>
-                <a href="#services" onClick={(e) => {
-                  e.preventDefault();
-                  const target = document.getElementById('services');
-                  if (target) {
-                    if (window.lenis) window.lenis.scrollTo(target, { offset: -80 });
-                    else window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
-                  }
-                }} className="text-foreground-muted hover:text-primary transition-colors text-sm hover:translate-x-1 inline-block duration-300">Services</a>
+                <a href="#services" onClick={(e) => handleSectionClick(e, 'services')} className="text-foreground-muted hover:text-primary transition-colors text-sm hover:translate-x-1 inline-block duration-300">Services</a>
               </li>
               <li>
-                <a href="#why-us" onClick={(e) => {
-                  e.preventDefault();
-                  const target = document.getElementById('why-us');
-                  if (target) {
-                    if (window.lenis) window.lenis.scrollTo(target, { offset: -80 });
-                    else window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
-                  }
-                }} className="text-foreground-muted hover:text-primary transition-colors text-sm hover:translate-x-1 inline-block duration-300">Why Choose Us</a>
+                <a href="#why-us" onClick={(e) => handleSectionClick(e, 'why-us')} className="text-foreground-muted hover:text-primary transition-colors text-sm hover:translate-x-1 inline-block duration-300">Why Choose Us</a>
               </li>
             </ul>
           </motion.div>

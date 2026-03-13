@@ -26,6 +26,7 @@ const Navbar = () => {
     label: link.name,
     link: link.href,
     ariaLabel: link.name,
+    isRoute: link.isRoute
   }));
 
   const socialItems = [
