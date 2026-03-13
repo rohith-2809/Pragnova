@@ -1,0 +1,20 @@
+.shuffle-parent {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  will-change: transform;
+}
+
+.shuffle-char {
+  display: inline-block;
+  will-change: transform;
+}
+
+.shuffle-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.shuffle-line {
+  display: block;
+}
