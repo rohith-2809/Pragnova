@@ -71,7 +71,20 @@ const Navbar = () => {
           accentColor="var(--color-secondary)" 
           scrolled={scrolled}
           leftHeaderContent={
-            <Link to="/" className="font-bold text-xl md:text-2xl tracking-tighter text-white hover:text-white/80 transition-colors duration-500 ease-out pointer-events-auto flex items-center p-2 -m-2 min-h-[44px]">
+            <Link 
+              to="/" 
+              onClick={(e) => {
+                if (window.location.pathname === '/') {
+                  e.preventDefault();
+                  if (window.lenis) {
+                    window.lenis.scrollTo(0, { duration: 1.5 });
+                  } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }
+              }}
+              className="font-bold text-xl md:text-2xl tracking-tighter text-white hover:text-white/80 transition-colors duration-500 ease-out pointer-events-auto flex items-center p-2 -m-2 min-h-[44px]"
+            >
               PRAGNOVA<span className="text-primary mr-2">.</span>
               <span className="text-sm font-normal text-foreground-muted tracking-wide hidden sm:inline-block">Technologies</span>
             </Link>
