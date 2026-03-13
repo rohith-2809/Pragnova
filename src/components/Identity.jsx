@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Cpu, Fingerprint, Globe } from 'lucide-react';
-import Shuffle from '../effects/shuffle';
+import Shuffle from '../effects/Shuffle';
 
 const Identity = () => {
   const identities = [
